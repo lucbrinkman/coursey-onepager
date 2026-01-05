@@ -161,7 +161,7 @@ Many of the key principles in good education design happen to be **easy to imple
         },
         {
           text: "Measured learning outcomes",
-          detail: `We measure learning outcomes to ensure we're actually teaching people stuff, rather than just making people *feel like* they've learned something – which is a common pitfall in popular  education.`,
+          detail: `We measure learning outcomes to ensure we're actually teaching people what we want, rather than just making people *feel like* they've learned something – which is a common pitfall in popular  education.`,
         },
       ],
     },
@@ -170,16 +170,37 @@ Many of the key principles in good education design happen to be **easy to imple
       headline: "Built to scale",
       bullets: [
         {
+          text: "Anyone can join",
+          detail: `Anyone who wants to take our course, can take our course. 
+          
+          Instead of having a lengthy application process, we have people try a quick lesson to check if they like what we offer.
+          
+          After the trial lesson, people who want to are guaranteed to be accepted in our course.
+          
+          We will try to match students of similar skill levels together.`,
+        },
+        {
           text: "$5/student marginal cost",
           detail: "AI tutoring costs are low and decreasing. See our [cost calculator](/costs) for the full breakdown.",
         },
         {
           text: "Volunteer-based facilitators",
-          detail: "Human facilitators enhance the experience but aren't required for core operations.",
+          detail: `Course facilitators enhance the experience but aren't required for teaching or operations.
+
+- The role of facilitators is to guide discussions, not to teach. This requires some social skills rather than technical know-how. This makes it much easier to find decent facilitators. 
+
+- Most of our technical teaching happens 1-on-1 with AI, not during the group meetings. The group meetings serve an important social role, but don't require our facilitators to transfer knowledge.
+
+- We will try to match the particularly promising groups with experienced facilitators.
+
+- Facilitators may, in the future, go through a short facilitator training course (couple hours) hosted on our course platform.
+
+- Longer-term, we envision AI being present in the group meetings, both to provide technical know-how and to potentially replace human facilitators altogether.
+                    `,
         },
         {
           text: "Fully automated operations",
-          detail: "Humans only improve the platform—they don't run courses. We're designed to reach millions, not hundreds.",
+          detail: "We're designed to reach millions. When we pay humans, it's to improve the platform and the course content – not to run courses or operations.",
         },
       ],
     },
@@ -211,31 +232,37 @@ export const timelineSection = {
       date: "Dec 1",
       label: "Started building",
       past: true,  // Already happened
-      detail: "Began development of the Coursey platform",
+      detail: "Began designing and building the Coursey platform. We've built a lot of the technical infrastructure to allow scaling the course cheaply and quickly. Course signup, scheduling, and delivery are all designed to be fully automated and the core of those systems is already in place.",
     },
     {
-      date: "Jan 5",
+      date: "Jan 3",
       label: "Lesson preview",
       past: true,  // Already happened
-      detail: "Launched interactive lesson preview for early feedback",
+      detail: "Launched an interactive lesson preview for early feedback",
     },
     {
-      date: "Jan",
+      date: "Ca. Jan 12",
       label: "Open beta",
       past: false,  // Coming up
-      detail: "Opening the platform for beta testers",
+      detail: "Opening the platform for beta testers, including a first 1h lesson with progress tracking and the ability to sign up for our first cohort.",
     },
     {
-      date: "Mid-Jan",
+      date: "Mid-Late Jan",
       label: "Beta cohort",
       past: false,  // Coming up
-      detail: "First structured cohort with group sessions",
+      detail: `Launch of the first structured cohort with group sessions. This allows us to figure out all the kinks in our automation system and fix them. We will facilitate this first cohort by ourselves.`,
     },
     {
-      date: "Feb",
-      label: "Full run + automation",
+      date: "Early Feb",
+      label: "Beta cohort 2",
       past: false,  // Coming up
-      detail: "First full course run with complete automation in place",
+      detail: "This second beta cohort will be run by external volunteer facilitators, which allows us to test what they need and to further test our automation systems.",
+    },
+    {
+      date: "Late Feb",
+      label: "Full scale cohort",
+      past: false,  // Coming up
+      detail: "",
     },
   ],
 
@@ -249,8 +276,12 @@ export const timelineSection = {
     },
     {
       date: "Apr",
-      label: "Matchmaking tool",
-      detail: "AI Safety networking and matchmaking platform for the community",
+      label: "Potential Sister Projects",
+      detail: `In the age of AI, you don't need an entire team to work for 1 year to build a product. We have several inter-related ideas to strengthen the AI Safety ecosystem, including:
+      
+      - More tightly integrating Stampy, an *informational* AI Safety chatbot (which has a slightly different focus from our *educational* AI Tutor.)
+
+      - An AI Safety networking and matchmaking tool, that connects people based on interests and skills.`,
     },
   ],
 
@@ -273,8 +304,14 @@ export const costsSection = {
   // Fixed costs explanation
   fixedCosts: {
     headline: "Fixed costs",
-    text: "Platform development: building the course content, AI tutoring system, and automation infrastructure.",
-    detail: "This is a one-time investment that enables us to reach millions of students.",
+    text: "Salaries for platform development: building the course content, AI tutoring system, and automation infrastructure.",
+    detail: `Roughly 150k USD/y per person, for 2 people. Those are budgets, not gross salaries. Employer-side costs and software costs will be incurred.
+
+    We expect to grow in the future, but leading AI-native companies show large teams are no longer required for success.
+    
+    Salaries wil be for:
+    - Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is platform.
+    - A co-founder that we're currently looking for. However, we're not depending on finding a cofounder quickly, and would rather take our time to find a really good match.`,
   },
 
   // Marginal costs explanation
@@ -282,8 +319,8 @@ export const costsSection = {
     headline: "Marginal costs",
     amount: "$5",
     amountLabel: "per student",
-    text: "Software fees for running the platform: AI API calls, hosting, and infrastructure.",
-    detail: "These are the only ongoing costs - no human labor required to run courses.",
+    text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure.",
+    // detail: "These are the only ongoing costs - no human labor required to run courses.",
   },
 };
 

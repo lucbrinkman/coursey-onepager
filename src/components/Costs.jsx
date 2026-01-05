@@ -30,24 +30,28 @@ function CostCard({ cost, isOpen, onToggle, showAmount }) {
         </div>
       )}
       <p className="text-gray-600">{cost.text}</p>
-      <button
-        onClick={onToggle}
-        className="flex items-center gap-1 mt-3 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
-      >
-        <ChevronDown
-          size={16}
-          className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-        />
-        {isOpen ? ui.less : ui.more}
-      </button>
-      <div
-        className="overflow-hidden transition-all duration-300 ease-in-out"
-        style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
-      >
-        <div ref={contentRef} className="pt-3 text-sm text-gray-600 whitespace-pre-line">
-          <FormattedText>{cost.detail}</FormattedText>
-        </div>
-      </div>
+      {cost.detail && (
+        <>
+          <button
+            onClick={onToggle}
+            className="flex items-center gap-1 mt-3 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
+          >
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+            {isOpen ? ui.less : ui.more}
+          </button>
+          <div
+            className="overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
+          >
+            <div ref={contentRef} className="pt-3 text-sm text-gray-600 whitespace-pre-line">
+              <FormattedText>{cost.detail}</FormattedText>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

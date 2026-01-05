@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
-import { timelineSection, ui } from '../../textContent'
+import { timelineSection } from '../../textContent'
 import FormattedText from './FormattedText'
 
 function TimelineItem({ item, isOpen, onToggle }) {
@@ -21,30 +21,27 @@ function TimelineItem({ item, isOpen, onToggle }) {
   }, [item.detail])
 
   return (
-    <div className="flex items-start gap-3 py-3">
-      <div className={`w-3 h-3 rounded-full mt-1.5 shrink-0 ${
+    <div className="flex items-start gap-3 py-2">
+      <div className={`w-3 h-3 rounded-full mt-2.5 shrink-0 ${
         item.past ? 'bg-gray-900' : 'border-2 border-gray-400 bg-white'
       }`} />
       <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500">{item.date}</span>
-          <span className="font-medium text-gray-900">{item.label}</span>
-        </div>
         <button
           onClick={onToggle}
-          className="flex items-center gap-1 mt-1 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
+          className="flex items-baseline gap-2 w-full text-left hover:bg-gray-50 rounded transition-colors cursor-pointer py-1"
         >
+          <span className="text-sm text-gray-500">{item.date}</span>
+          <span className="font-medium text-gray-900">{item.label}</span>
           <ChevronDown
-            size={16}
-            className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            size={14}
+            className={`shrink-0 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           />
-          {isOpen ? ui.less : ui.more}
         </button>
         <div
           className="overflow-hidden transition-all duration-300 ease-in-out"
           style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
         >
-          <div ref={contentRef} className="pt-2 pb-1 text-sm text-gray-600 whitespace-pre-line">
+          <div ref={contentRef} className="pt-1 pb-2 text-sm text-gray-500 whitespace-pre-line">
             <FormattedText>{item.detail}</FormattedText>
           </div>
         </div>

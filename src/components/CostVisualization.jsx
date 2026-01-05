@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, MessageSquare, Bot, Mic } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ArrowLeft, BookOpen, MessageSquare, Bot, Mic } from 'lucide-react';
+import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // Default parameters
 const DEFAULT_PARAMS = {
@@ -25,7 +25,8 @@ const DEFAULT_PARAMS = {
 };
 
 const COLORS = {
-  conversation: '#3b82f6',
+  lessonContent: '#3b82f6',
+  studentMessages: '#f59e0b',
   aiResponses: '#22c55e',
   voiceInput: '#a855f7',
 };
@@ -38,33 +39,35 @@ function calculateCosts(params) {
 
   const tokensToUSD = (tokens, pricePerMTok) => (tokens / 1_000_000) * pricePerMTok;
 
-  // Calculate costs in a simplified way
-  let inputCost = 0;
+  // Track costs separately
+  let lessonContentCost = 0;  // Articles, video transcripts, system prompt
+  let studentMessagesCost = 0; // User messages
   let outputCost = 0;
 
   for (let conv = 1; conv <= params.conversationsPerLesson; conv++) {
     let prefixTokens = staticPrefixTokens;
 
     for (let turn = 1; turn <= params.turnsPerConversation; turn++) {
-      let cacheRead, cacheWrite;
-
       if (turn === 1) {
         if (conv === 1) {
-          cacheWrite = staticPrefixTokens + userMessageTokens;
-          cacheRead = 0;
+          // First turn of first conversation: write everything
+          lessonContentCost += tokensToUSD(staticPrefixTokens, params.cacheWritePerMTok);
+          studentMessagesCost += tokensToUSD(userMessageTokens, params.cacheWritePerMTok);
         } else {
-          cacheRead = staticPrefixTokens;
-          cacheWrite = userMessageTokens;
+          // First turn of later conversations: read static, write user message
+          lessonContentCost += tokensToUSD(staticPrefixTokens, params.cacheReadPerMTok);
+          studentMessagesCost += tokensToUSD(userMessageTokens, params.cacheWritePerMTok);
         }
       } else {
-        cacheRead = prefixTokens;
-        cacheWrite = params.aiResponseTokens + userMessageTokens;
+        // Later turns: read prefix (includes static + history), write new message
+        // Attribute the static portion to lesson content, rest to student messages
+        const historyTokens = prefixTokens - staticPrefixTokens;
+        lessonContentCost += tokensToUSD(staticPrefixTokens, params.cacheReadPerMTok);
+        studentMessagesCost += tokensToUSD(historyTokens, params.cacheReadPerMTok);
+        studentMessagesCost += tokensToUSD(userMessageTokens + params.aiResponseTokens, params.cacheWritePerMTok);
       }
 
       prefixTokens += params.aiResponseTokens + userMessageTokens;
-
-      inputCost += tokensToUSD(cacheRead, params.cacheReadPerMTok);
-      inputCost += tokensToUSD(cacheWrite, params.cacheWritePerMTok);
       outputCost += tokensToUSD(params.aiResponseTokens, params.outputPerMTok);
     }
   }
@@ -75,14 +78,15 @@ function calculateCosts(params) {
   const minutesPerMessage = params.userMessageWords / params.speakingWordsPerMinute;
   const whisperCost = voiceMessages * minutesPerMessage * params.whisperPerMinute;
 
-  const lessonTotal = inputCost + outputCost + whisperCost;
+  const lessonTotal = lessonContentCost + studentMessagesCost + outputCost + whisperCost;
 
   // Scale calculations
   const lessonsPerCourse = params.modulesPerCourse * params.lessonsPerModule;
 
   return {
     lesson: {
-      lessonContent: inputCost,
+      lessonContent: lessonContentCost,
+      studentMessages: studentMessagesCost,
       aiResponses: outputCost,
       voiceInput: whisperCost,
       total: lessonTotal,
@@ -100,22 +104,7 @@ function calculateCosts(params) {
 }
 
 function formatCurrency(value) {
-  return `$${value.toFixed(2)}`;
-}
-
-function CustomTooltip({ active, payload, label }) {
-  if (!active || !payload?.length) return null;
-
-  return (
-    <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
-      <p className="font-medium text-gray-900 mb-2">{label}</p>
-      {payload.map((entry, index) => (
-        <p key={index} style={{ color: entry.color }} className="text-sm">
-          {entry.name}: {formatCurrency(entry.value)}
-        </p>
-      ))}
-    </div>
-  );
+  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
 export default function CostVisualization() {
@@ -123,16 +112,10 @@ export default function CostVisualization() {
   const costs = useMemo(() => calculateCosts(params), [params]);
 
   const breakdownData = [
-    { name: 'Conversation context', value: costs.lesson.lessonContent, color: COLORS.conversation },
+    { name: 'Lesson content', value: costs.lesson.lessonContent, color: COLORS.lessonContent },
+    { name: 'Student messages', value: costs.lesson.studentMessages, color: COLORS.studentMessages },
     { name: 'AI tutor responses', value: costs.lesson.aiResponses, color: COLORS.aiResponses },
     { name: 'Voice transcription', value: costs.lesson.voiceInput, color: COLORS.voiceInput },
-  ];
-
-  const scaleData = [
-    { name: '1 student', cost: costs.course.total },
-    { name: '100 students', cost: costs.course.total * 100 },
-    { name: '1,000 students', cost: costs.course.total * 1000 },
-    { name: '10,000 students', cost: costs.course.total * 10000 },
   ];
 
   const updateParam = (key, value) => {
@@ -173,7 +156,7 @@ export default function CostVisualization() {
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 text-center">
             <p className="text-sm text-slate-500 uppercase tracking-wide mb-1">1,000 Students</p>
-            <p className="text-4xl font-bold text-green-600">{formatCurrency(costs.course.total * 1000)}</p>
+            <p className="text-4xl font-bold text-slate-800">${Math.round(costs.course.total * 1000).toLocaleString('en-US')}</p>
           </div>
         </div>
 
@@ -183,17 +166,29 @@ export default function CostVisualization() {
           <p className="text-slate-600 mb-6">
             Students chat with an AI tutor about the course content. Each conversation has context (the lesson material and chat history) plus the AI's responses.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="flex gap-3">
               <div className="p-2 bg-blue-100 rounded-lg h-fit">
-                <MessageSquare size={20} className="text-blue-600" />
+                <BookOpen size={20} className="text-blue-600" />
               </div>
               <div>
-                <h3 className="font-medium text-slate-800">Conversation context</h3>
+                <h3 className="font-medium text-slate-800">Lesson content</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  The AI needs to see the lesson content and chat history to give helpful responses.
+                  Articles and video transcripts the AI reads to understand the material.
                 </p>
                 <p className="text-sm font-medium text-blue-600 mt-2">{formatCurrency(costs.lesson.lessonContent)}/lesson</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <div className="p-2 bg-amber-100 rounded-lg h-fit">
+                <MessageSquare size={20} className="text-amber-600" />
+              </div>
+              <div>
+                <h3 className="font-medium text-slate-800">Student messages</h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  What students type or say, plus the conversation history.
+                </p>
+                <p className="text-sm font-medium text-amber-600 mt-2">{formatCurrency(costs.lesson.studentMessages)}/lesson</p>
               </div>
             </div>
             <div className="flex gap-3">
@@ -203,7 +198,7 @@ export default function CostVisualization() {
               <div>
                 <h3 className="font-medium text-slate-800">AI tutor responses</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  The AI generates personalized explanations, answers questions, and guides learning.
+                  Personalized explanations, answers, and guidance.
                 </p>
                 <p className="text-sm font-medium text-green-600 mt-2">{formatCurrency(costs.lesson.aiResponses)}/lesson</p>
               </div>
@@ -215,7 +210,7 @@ export default function CostVisualization() {
               <div>
                 <h3 className="font-medium text-slate-800">Voice transcription</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  Students can speak instead of type. We transcribe ~{Math.round(params.voiceInputFraction * 100)}% of messages.
+                  Transcribing ~{Math.round(params.voiceInputFraction * 100)}% of messages from speech.
                 </p>
                 <p className="text-sm font-medium text-purple-600 mt-2">{formatCurrency(costs.lesson.voiceInput)}/lesson</p>
               </div>
@@ -223,61 +218,43 @@ export default function CostVisualization() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Cost breakdown pie */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Cost Breakdown (Per Lesson)</h2>
-            <ResponsiveContainer width="100%" height={280}>
-              <PieChart>
-                <Pie
-                  data={breakdownData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={2}
-                  dataKey="value"
-                  label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                  labelLine={false}
-                >
-                  {breakdownData.map((entry, index) => (
-                    <Cell key={index} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => formatCurrency(value)} />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="flex justify-center gap-4 mt-2 flex-wrap">
-              {breakdownData.map((item) => (
-                <div key={item.name} className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-sm text-slate-600">{item.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Scale */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Cost at Scale (Per Course)</h2>
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={scaleData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 12 }} />
-                <YAxis tickFormatter={(v) => v >= 1000 ? `$${(v/1000).toFixed(0)}k` : `$${v.toFixed(0)}`} tick={{ fill: '#64748b' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="cost" name="Total Cost" fill="#22c55e" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-            <p className="text-sm text-slate-500 mt-2 text-center">
-              Linear scaling: {costs.params.lessonsPerCourse} lessons × {formatCurrency(costs.lesson.total)}/lesson
-            </p>
+        {/* Cost breakdown pie */}
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-8 max-w-md mx-auto">
+          <h2 className="text-lg font-semibold text-slate-800 mb-4 text-center">Cost Breakdown (Per Lesson)</h2>
+          <ResponsiveContainer width="100%" height={280}>
+            <PieChart>
+              <Pie
+                data={breakdownData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={100}
+                paddingAngle={2}
+                dataKey="value"
+                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+                labelLine={false}
+              >
+                {breakdownData.map((entry, index) => (
+                  <Cell key={index} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => formatCurrency(value)} />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="flex justify-center gap-4 mt-2 flex-wrap">
+            {breakdownData.map((item) => (
+              <div key={item.name} className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                <span className="text-sm text-slate-600">{item.name}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* What's in a lesson */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-8">
           <h2 className="text-lg font-semibold text-slate-800 mb-4">What's in a lesson?</h2>
+          <p className="text-slate-600 mb-4 text-center">A lesson is about one hour of work.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
               <p className="text-3xl font-bold text-slate-800">{params.articlesPerLesson}</p>
@@ -331,7 +308,7 @@ export default function CostVisualization() {
         </details>
 
         <p className="text-center text-slate-400 text-sm mt-8">
-          Using Claude 3.5 Sonnet with prompt caching • Whisper API for voice
+          Calculated costs are based on: Claude Sonnet 4.5 with prompt caching • Whisper API for voice
           <br />
           Traditional software costs (hosting, database) are minimal compared to AI costs.
         </p>

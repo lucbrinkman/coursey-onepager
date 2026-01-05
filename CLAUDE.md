@@ -26,7 +26,7 @@ npm run preview  # Preview production build
 ## Architecture
 
 ### Content Separation
-All text content lives in `src/content.js`. This file is designed to be edited by non-developers - comments explain what each field does and how to edit safely. Components import from this file rather than hardcoding text.
+All text content lives in `textContent.js` (in the project root). This file is designed to be edited by non-developers - comments explain what each field does and how to edit safely. Components import from this file rather than hardcoding text.
 
 ### Expand/Collapse System
 `ExpandContext.jsx` provides a React context for coordinating expand/collapse state across all sections. Components use the `useExpand()` hook to:
@@ -56,9 +56,9 @@ Each section component is self-contained and uses `ExpandableSection` for consis
 - **InfoTooltip**: Shows additional detail on hover/tap for cards
 - **ExpandableSection**: Reusable collapsible section with consistent styling
 
-## Important: Editing content.js
+## Important: Editing textContent.js
 
-When editing `src/content.js`:
+When editing `textContent.js`:
 - **Never delete existing text** unless explicitly asked to
 - **Only make the specific changes requested** - do not "clean up" or "improve" surrounding content
 - **Leave unfinished sentences, placeholder text, and comments as-is** - they are intentional drafts
