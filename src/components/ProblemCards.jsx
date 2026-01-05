@@ -1,18 +1,18 @@
 import { Users, Compass } from 'lucide-react'
-import InfoTooltip from './InfoTooltip'
+import ExpandableSection from './ExpandableSection'
 
 const problems = [
   {
     icon: Users,
     headline: 'Too few spots',
     text: 'BlueDot had 1,450 applications for 400 spots. Most people who want to learn AI Safety can\'t get in.',
-    tooltip: 'Demand for AI Safety education far outstrips available supply across all major programs.',
+    detail: 'Demand for AI Safety education far outstrips available supply across all major programs.',
   },
   {
     icon: Compass,
     headline: 'Unclear what to do',
     text: 'People finish courses without knowing what they should actually work on, or why alignment is so hard.',
-    tooltip: 'Current courses often focus on knowledge transfer without developing strategic thinking about career paths and impactful work.',
+    detail: 'Current courses often focus on knowledge transfer without developing strategic thinking about career paths and impactful work.',
   },
 ]
 
@@ -27,15 +27,15 @@ export default function ProblemCards() {
             className="p-6 bg-gray-50 rounded-xl border border-gray-200"
           >
             <div className="flex items-start gap-4">
-              <div className="p-2 bg-white rounded-lg shadow-sm">
+              <div className="p-2 bg-white rounded-lg shadow-sm shrink-0">
                 <problem.icon size={24} className="text-gray-700" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-lg text-gray-900 flex items-center">
+                <h3 className="font-semibold text-lg text-gray-900">
                   {problem.headline}
-                  <InfoTooltip content={problem.tooltip} />
                 </h3>
                 <p className="mt-2 text-gray-600">{problem.text}</p>
+                <ExpandableSection content={problem.detail} />
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ export default function InfoTooltip({ content }) {
       <span className="inline-flex items-center justify-center p-2 -m-2 cursor-help">
         <Info
           size={18}
-          className="text-gray-400 group-hover:text-gray-600 transition-colors"
+          className="text-gray-400 group-hover:text-gray-600 transition-colors translate-y-0.5"
         />
       </span>
       {isVisible && (
