@@ -2,15 +2,22 @@ import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
 import { costsSection, ui } from '../../textContent'
+import FormattedText from './FormattedText'
 
 function CostCard({ cost, isOpen, onToggle, showAmount }) {
   const contentRef = useRef(null)
   const [height, setHeight] = useState(0)
 
   useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight)
+    const updateHeight = () => {
+      if (contentRef.current) {
+        setHeight(contentRef.current.scrollHeight)
+      }
     }
+
+    updateHeight()
+    window.addEventListener('resize', updateHeight)
+    return () => window.removeEventListener('resize', updateHeight)
   }, [cost.detail])
 
   return (
@@ -37,8 +44,8 @@ function CostCard({ cost, isOpen, onToggle, showAmount }) {
         className="overflow-hidden transition-all duration-300 ease-in-out"
         style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
       >
-        <div ref={contentRef} className="pt-3 text-sm text-gray-600">
-          {cost.detail}
+        <div ref={contentRef} className="pt-3 text-sm text-gray-600 whitespace-pre-line">
+          <FormattedText>{cost.detail}</FormattedText>
         </div>
       </div>
     </div>

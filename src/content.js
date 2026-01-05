@@ -25,7 +25,7 @@
 
 export const header = {
   // The main title shown at the top of the page
-  title: "Coursey – Donor One-pager",
+  title: "Coursey",
 };
 
 
@@ -65,40 +65,8 @@ export const problemsSection = {
 // A brief bridge between problems and what makes us different
 
 export const solutionSection = {
-  sectionTitle: "The Solution",
   // A single punchy sentence introducing Coursey
-  text: "Build a scalable solution to help people understand the current situation to empower them to use their agency to do something about this.",
-};
-
-
-// ============================================================================
-// THEORY OF CHANGE SECTION
-// ============================================================================
-// The causal chain showing how our solution leads to impact.
-// Each step connects to the next with an arrow/flow.
-
-export const theoryOfChangeSection = {
-  sectionTitle: "Theory of Change",
-
-  // The causal chain - each step leads to the next
-  steps: [
-    {
-      label: "Build scalable education",
-      detail: "Create a platform that can reach millions at $5/student",
-    },
-    {
-      label: "People understand the situation",
-      detail: "Teach why misaligned superintelligence is a core risk and why alignment is hard",
-    },
-    {
-      label: "Empower agency",
-      detail: "Give people strategic thinking about what they can actually work on",
-    },
-    {
-      label: "Take meaningful action",
-      detail: "More people contributing to AI Safety research, policy, and governance",
-    },
-  ],
+  text: "Coursey is an AI Safety course that scales to millions while teaching what actually matters.",
 };
 
 
@@ -108,9 +76,8 @@ export const theoryOfChangeSection = {
 // These are the Unique Selling Points - what makes Coursey special.
 // Each USP has:
 //   - headline: Short title (2-4 words)
-//   - bullets: 3 key points, each with:
-//       - text: The bullet point text
-//       - detail: More context shown when user clicks to expand
+//   - bullets: 3 key points shown as a list
+//   - detail: More context shown when user clicks "More"
 
 export const uspSection = {
   // The heading above all the USP cards
@@ -121,67 +88,31 @@ export const uspSection = {
       // USP 1: We teach the right content
       headline: "Focus on what matters",
       bullets: [
-        {
-          text: "Misaligned superintelligence as the core risk",
-          detail: "We focus on the scenarios most likely to cause existential harm and make them tangible, instead of focusing on topics that are easiest to explain but are less likely to cause catastrophe.",
-        },
-        {
-          text: "Why alignment is actually hard",
-          detail: "We teach the core technical and philosophical challenges that make AI alignment genuinely difficult.",
-        },
-        {
-          text: "Strategic thinking about what to work on",
-          detail: "Our learning outcomes include skills, not just knowledge—helping students figure out where they can contribute.",
-        },
+        "Misaligned superintelligence as the core risk",
+        "Why alignment is actually hard",
+        "Strategic thinking about what to work on",
       ],
+      detail: "We teach the things most likely to cause existential harm, not the politically convenient topics. Our learning outcomes include skills, not just knowledge.",
     },
     {
       // USP 2: We use AI to teach effectively
-      headline: "Top notch education",
+      headline: "AI-powered learning",
       bullets: [
-        {
-          text: "1-on-1 AI tutoring",
-          detail: `There are several reasons for relying heavily on AI:
-
-Studies have shown well-implemented AI tutors are **similarly effective to human 1-on-1 tutors**, which are in turn one of the most effective methods of education.
-
-Many of the key principles in good education design happen to be **easy to implement with AI, and hard without it**. For example, having the learner answer open questions is much more effective at achieving learning outcomes than answering multiple-choice questions. However, this requires giving the learner feedback on their answer in a way that's only scalable with AI.
-
-3) AI is already great at education today, and it **will only get better in the years to come.**`,
-        },
-        {
-          text: "Informed by science",
-          detail: `We follow science-informed best practices in education, including:
-
-**Active learning** ≈ stuff where the learner has to generate some output. This is much more effective than passive learning (e.g. reading, watching) alone.
-
-**Breaking down learning outcomes** (knowledge and skills) into smaller steps and then practicing at increasingly harder levels.
-
-**Spaced repetition**: brains need to get back to a topic over time to remember it long-term. At the end of the course, the learner should still be capable of the learning outcomes of all lessons – not just the last lesson.`,
-        },
-        {
-          text: "Measured learning outcomes",
-          detail: `We measure learning outcomes to ensure we're actually teaching people stuff, rather than just making people *feel like* they've learned something – which is a common pitfall in popular  education.`,
-        },
+        "1-on-1 AI tutoring for active learning",
+        "Spaced repetition for retention",
+        "Measured learning outcomes",
       ],
+      detail: `We measure learning outcomes to ensure we're actually teaching people stuff, rather than just making people *feel like* they've learned something – which is a common pitfall in popular  education.`,
     },
     {
       // USP 3: We can grow to millions of students
       headline: "Built to scale",
       bullets: [
-        {
-          text: "$5/student marginal cost",
-          detail: "AI tutoring costs are low and decreasing. See our [cost calculator](/costs) for the full breakdown.",
-        },
-        {
-          text: "Volunteer-based facilitators",
-          detail: "Human facilitators enhance the experience but aren't required for core operations.",
-        },
-        {
-          text: "Fully automated operations",
-          detail: "Humans only improve the platform—they don't run courses. We're designed to reach millions, not hundreds.",
-        },
+        "$5/student marginal cost",
+        "Volunteer-based facilitators",
+        "Fully automated operations",
       ],
+      detail: "Humans only improve the platform—they don't run courses. We're designed to reach millions, not hundreds.",
     },
   ],
 };
@@ -211,7 +142,7 @@ export const timelineSection = {
       date: "Dec 1",
       label: "Started building",
       past: true,  // Already happened
-      detail: "Began development of the Coursey platform",
+      detail: "Began designing and building the Coursey platform. We've built a lot of the technical infrastructure to allow scaling the course cheaply and quickly. Course signup, scheduling, and delivery are all designed to be fully automated and the core of those systems is already in place..",
     },
     {
       date: "Jan 5",
@@ -263,47 +194,28 @@ export const timelineSection = {
 
 
 // ============================================================================
-// COSTS SECTION
-// ============================================================================
-// Explains our cost structure - fixed costs for development, marginal costs for running
-
-export const costsSection = {
-  sectionTitle: "Costs",
-
-  // Fixed costs explanation
-  fixedCosts: {
-    headline: "Fixed costs",
-    text: "Platform development: building the course content, AI tutoring system, and automation infrastructure.",
-    detail: "This is a one-time investment that enables us to reach millions of students.",
-  },
-
-  // Marginal costs explanation
-  marginalCosts: {
-    headline: "Marginal costs",
-    amount: "$5",
-    amountLabel: "per student",
-    text: "Software fees for running the platform: AI API calls, hosting, and infrastructure.",
-    detail: "These are the only ongoing costs - no human labor required to run courses.",
-  },
-};
-
-
-// ============================================================================
 // THE ASK SECTION
 // ============================================================================
 // What we're asking for from the donor
 
 export const askSection = {
+  // The heading above the ask
   sectionTitle: "The Ask",
 
   // The main funding ask
   fundingAsk: {
     amount: "$100k",
-    description: "4 months runway for 2 people",
+    description: "4 months, 2 people",
   },
 
-  // Context line below the ask
-  contextLine: "Funding to reach full automation and first cohort at scale.",
+  // The cost per student metric
+  costPerStudent: {
+    amount: "$5",
+    description: "per student marginal cost",
+  },
+
+  // Optional context line below the numbers
+  contextLine: "Funding runway to reach full automation and first cohort at scale.",
 };
 
 

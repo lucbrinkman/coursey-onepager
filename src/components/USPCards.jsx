@@ -27,15 +27,17 @@ export default function USPCards() {
                   {usp.headline}
                 </h3>
               </div>
-              <ul className="space-y-2">
+              <div className="space-y-0">
                 {usp.bullets.map((bullet, i) => (
-                  <li key={i} className="text-gray-600 flex items-start gap-2">
-                    <span className="text-gray-400 mt-1">•</span>
-                    {bullet}
-                  </li>
+                  <ExpandableSection
+                    key={i}
+                    content={bullet.detail}
+                    trigger={
+                      <span className="text-gray-600">{bullet.text}</span>
+                    }
+                  />
                 ))}
-              </ul>
-              <ExpandableSection content={usp.detail} />
+              </div>
             </div>
           )
         })}

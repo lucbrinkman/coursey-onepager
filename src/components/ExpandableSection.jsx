@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
 import { ui } from '../../textContent'
+import FormattedText from './FormattedText'
 
-export default function ExpandableSection({ content }) {
+export default function ExpandableSection({ content, trigger }) {
   const { expandAll } = useExpand()
   const [isOpen, setIsOpen] = useState(false)
   const contentRef = useRef(null)
@@ -14,11 +15,45 @@ export default function ExpandableSection({ content }) {
   }, [expandAll])
 
   useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight)
+    const updateHeight = () => {
+      if (contentRef.current) {
+        setHeight(contentRef.current.scrollHeight)
+      }
     }
+
+    updateHeight()
+    window.addEventListener('resize', updateHeight)
+    return () => window.removeEventListener('resize', updateHeight)
   }, [content])
 
+  // If a custom trigger is provided, use inline style
+  if (trigger) {
+    return (
+      <div>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-1 text-left w-full hover:bg-gray-50 rounded transition-colors cursor-pointer py-1"
+          aria-expanded={isOpen}
+        >
+          <ChevronDown
+            size={14}
+            className={`shrink-0 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          />
+          {trigger}
+        </button>
+        <div
+          className="overflow-hidden transition-all duration-300 ease-in-out"
+          style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
+        >
+          <div ref={contentRef} className="pl-5 pt-1 pb-2 text-sm text-gray-500 whitespace-pre-line">
+            <FormattedText>{content}</FormattedText>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Default "More/Less" button style
   return (
     <div className="mt-3">
       <button
@@ -36,8 +71,8 @@ export default function ExpandableSection({ content }) {
         className="overflow-hidden transition-all duration-300 ease-in-out"
         style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
       >
-        <div ref={contentRef} className="pt-3 pb-1 text-sm text-gray-600">
-          {content}
+        <div ref={contentRef} className="pt-3 pb-1 text-sm text-gray-600 whitespace-pre-line">
+          <FormattedText>{content}</FormattedText>
         </div>
       </div>
     </div>

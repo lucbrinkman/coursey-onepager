@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, MessageSquare, Bot, Mic } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Bot, Mic } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // Default parameters
@@ -25,7 +25,7 @@ const DEFAULT_PARAMS = {
 };
 
 const COLORS = {
-  lessonContent: '#3b82f6',
+  conversation: '#3b82f6',
   aiResponses: '#22c55e',
   voiceInput: '#a855f7',
 };
@@ -123,7 +123,7 @@ export default function CostVisualization() {
   const costs = useMemo(() => calculateCosts(params), [params]);
 
   const breakdownData = [
-    { name: 'Reading lesson content', value: costs.lesson.lessonContent, color: COLORS.lessonContent },
+    { name: 'Conversation context', value: costs.lesson.lessonContent, color: COLORS.conversation },
     { name: 'AI tutor responses', value: costs.lesson.aiResponses, color: COLORS.aiResponses },
     { name: 'Voice transcription', value: costs.lesson.voiceInput, color: COLORS.voiceInput },
   ];
@@ -156,7 +156,7 @@ export default function CostVisualization() {
             Cost Per Student
           </h1>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-            Each student has 1-on-1 conversations with an AI tutor. Here's what that costs.
+            Students chat with an AI tutor about the course content. Here's what that costs.
           </p>
         </div>
 
@@ -180,15 +180,18 @@ export default function CostVisualization() {
         {/* Explanation */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-8">
           <h2 className="text-lg font-semibold text-slate-800 mb-4">Where do the costs come from?</h2>
+          <p className="text-slate-600 mb-6">
+            Students chat with an AI tutor about the course content. Each conversation has context (the lesson material and chat history) plus the AI's responses.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex gap-3">
               <div className="p-2 bg-blue-100 rounded-lg h-fit">
-                <BookOpen size={20} className="text-blue-600" />
+                <MessageSquare size={20} className="text-blue-600" />
               </div>
               <div>
-                <h3 className="font-medium text-slate-800">Reading lesson content</h3>
+                <h3 className="font-medium text-slate-800">Conversation context</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  The AI reads the lesson articles to understand the material before tutoring the student.
+                  The AI needs to see the lesson content and chat history to give helpful responses.
                 </p>
                 <p className="text-sm font-medium text-blue-600 mt-2">{formatCurrency(costs.lesson.lessonContent)}/lesson</p>
               </div>
@@ -200,7 +203,7 @@ export default function CostVisualization() {
               <div>
                 <h3 className="font-medium text-slate-800">AI tutor responses</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  The AI generates personalized responses, explanations, and follow-up questions.
+                  The AI generates personalized explanations, answers questions, and guides learning.
                 </p>
                 <p className="text-sm font-medium text-green-600 mt-2">{formatCurrency(costs.lesson.aiResponses)}/lesson</p>
               </div>
@@ -329,6 +332,8 @@ export default function CostVisualization() {
 
         <p className="text-center text-slate-400 text-sm mt-8">
           Using Claude 3.5 Sonnet with prompt caching • Whisper API for voice
+          <br />
+          Traditional software costs (hosting, database) are minimal compared to AI costs.
         </p>
       </div>
     </div>
