@@ -1,19 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
-
-const mainMilestones = [
-  { date: 'Dec 1', label: 'Started building', past: true, detail: 'Began development of the Coursey platform' },
-  { date: 'Jan 5', label: 'Lesson preview', past: true, detail: 'Launched interactive lesson preview for early feedback' },
-  { date: 'Jan', label: 'Open beta', past: false, detail: 'Opening the platform for beta testers' },
-  { date: 'Mid-Jan', label: 'Beta cohort', past: false, detail: 'First structured cohort with group sessions' },
-  { date: 'Feb', label: 'Full run + automation', past: false, detail: 'First full course run with complete automation in place' },
-]
-
-const branches = [
-  { date: 'Mar', label: 'Second course + creation tools', detail: 'Launching additional course content and tools for easier course creation' },
-  { date: 'Apr', label: 'Matchmaking tool', detail: 'AI Safety networking and matchmaking platform for the community' },
-]
+import { timelineSection, ui } from '../../textContent'
 
 function TimelineItem({ item, isOpen, onToggle }) {
   const contentRef = useRef(null)
@@ -43,7 +31,7 @@ function TimelineItem({ item, isOpen, onToggle }) {
             size={16}
             className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           />
-          {isOpen ? 'Less' : 'More'}
+          {isOpen ? ui.less : ui.more}
         </button>
         <div
           className="overflow-hidden transition-all duration-300 ease-in-out"
@@ -65,8 +53,8 @@ export default function Timeline() {
   useEffect(() => {
     if (expandAll) {
       const allOpen = {}
-      mainMilestones.forEach((_, i) => allOpen[`main-${i}`] = true)
-      branches.forEach((_, i) => allOpen[`branch-${i}`] = true)
+      timelineSection.mainMilestones.forEach((_, i) => allOpen[`main-${i}`] = true)
+      timelineSection.branches.forEach((_, i) => allOpen[`branch-${i}`] = true)
       setOpenItems(allOpen)
     } else {
       setOpenItems({})
@@ -79,12 +67,14 @@ export default function Timeline() {
 
   return (
     <section className="py-16">
-      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-900">Timeline</h2>
+      <h2 className="text-2xl font-semibold text-center mb-8 text-gray-900">
+        {timelineSection.sectionTitle}
+      </h2>
 
       <div className="max-w-2xl mx-auto px-4">
         {/* Main timeline */}
         <div className="border-l-2 border-gray-200 ml-1.5">
-          {mainMilestones.map((m, i) => (
+          {timelineSection.mainMilestones.map((m, i) => (
             <div key={m.date} className="-ml-[7px]">
               <TimelineItem
                 item={m}
@@ -97,12 +87,12 @@ export default function Timeline() {
 
         {/* Branches label */}
         <div className="mt-8 mb-4 text-sm font-medium text-gray-500 uppercase tracking-wide">
-          Expanding to...
+          {timelineSection.branchesLabel}
         </div>
 
         {/* Branch items */}
         <div className="border-l-2 border-gray-200 ml-1.5 border-dashed">
-          {branches.map((b, i) => (
+          {timelineSection.branches.map((b, i) => (
             <div key={b.date} className="-ml-[7px]">
               <TimelineItem
                 item={{ ...b, past: false }}
@@ -117,11 +107,11 @@ export default function Timeline() {
         <div className="flex gap-6 mt-8 text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-gray-900" />
-            <span>Completed</span>
+            <span>{timelineSection.legend.completed}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full border-2 border-gray-400 bg-white" />
-            <span>Upcoming</span>
+            <span>{timelineSection.legend.upcoming}</span>
           </div>
         </div>
       </div>

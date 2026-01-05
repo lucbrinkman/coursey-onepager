@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
+import { ui } from '../../textContent'
 
 export default function ExpandableSection({ content }) {
   const { expandAll } = useExpand()
@@ -29,7 +30,7 @@ export default function ExpandableSection({ content }) {
           size={16}
           className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
         />
-        {isOpen ? 'Less' : 'More'}
+        {isOpen ? ui.less : ui.more}
       </button>
       <div
         className="overflow-hidden transition-all duration-300 ease-in-out"

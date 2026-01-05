@@ -1,5 +1,6 @@
 import { useExpand } from './ExpandContext'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ui } from '../../textContent'
 
 export default function ExpandAllToggle() {
   const { expandAll, setExpandAll } = useExpand()
@@ -13,12 +14,12 @@ export default function ExpandAllToggle() {
         {expandAll ? (
           <>
             <ChevronUp size={16} />
-            Collapse all
+            {ui.collapseAll}
           </>
         ) : (
           <>
             <ChevronDown size={16} />
-            Expand all
+            {ui.expandAll}
           </>
         )}
       </button>
