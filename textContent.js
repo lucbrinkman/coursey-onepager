@@ -65,8 +65,40 @@ export const problemsSection = {
 // A brief bridge between problems and what makes us different
 
 export const solutionSection = {
+  sectionTitle: "The Solution",
   // A single punchy sentence introducing Coursey
-  text: "Coursey is an AI Safety course that scales to millions while teaching what actually matters.",
+  text: "Build a scalable solution to help people understand the current situation to empower them to use their agency to do something about this.",
+};
+
+
+// ============================================================================
+// THEORY OF CHANGE SECTION
+// ============================================================================
+// The causal chain showing how our solution leads to impact.
+// Each step connects to the next with an arrow/flow.
+
+export const theoryOfChangeSection = {
+  sectionTitle: "Theory of Change",
+
+  // The causal chain - each step leads to the next
+  steps: [
+    {
+      label: "Build scalable education",
+      detail: "Create a platform that can reach millions at $5/student",
+    },
+    {
+      label: "People understand the situation",
+      detail: "Teach why misaligned superintelligence is a core risk and why alignment is hard",
+    },
+    {
+      label: "Empower agency",
+      detail: "Give people strategic thinking about what they can actually work on",
+    },
+    {
+      label: "Take meaningful action",
+      detail: "More people contributing to AI Safety research, policy, and governance",
+    },
+  ],
 };
 
 
@@ -194,28 +226,47 @@ export const timelineSection = {
 
 
 // ============================================================================
+// COSTS SECTION
+// ============================================================================
+// Explains our cost structure - fixed costs for development, marginal costs for running
+
+export const costsSection = {
+  sectionTitle: "Costs",
+
+  // Fixed costs explanation
+  fixedCosts: {
+    headline: "Fixed costs",
+    text: "Platform development: building the course content, AI tutoring system, and automation infrastructure.",
+    detail: "This is a one-time investment that enables us to reach millions of students.",
+  },
+
+  // Marginal costs explanation
+  marginalCosts: {
+    headline: "Marginal costs",
+    amount: "$5",
+    amountLabel: "per student",
+    text: "Software fees for running the platform: AI API calls, hosting, and infrastructure.",
+    detail: "These are the only ongoing costs - no human labor required to run courses.",
+  },
+};
+
+
+// ============================================================================
 // THE ASK SECTION
 // ============================================================================
 // What we're asking for from the donor
 
 export const askSection = {
-  // The heading above the ask
   sectionTitle: "The Ask",
 
   // The main funding ask
   fundingAsk: {
     amount: "$100k",
-    description: "4 months, 2 people",
+    description: "4 months runway for 2 people",
   },
 
-  // The cost per student metric
-  costPerStudent: {
-    amount: "$5",
-    description: "per student marginal cost",
-  },
-
-  // Optional context line below the numbers
-  contextLine: "Funding runway to reach full automation and first cohort at scale.",
+  // Context line below the ask
+  contextLine: "Funding to reach full automation and first cohort at scale.",
 };
 
 
