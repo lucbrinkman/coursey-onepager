@@ -29,7 +29,7 @@ function CostCard({ cost, isOpen, onToggle, showAmount }) {
           <span className="text-gray-600 ml-1">{cost.amountLabel}</span>
         </div>
       )}
-      <p className="text-gray-600">{cost.text}</p>
+      <p className="text-gray-600"><FormattedText>{cost.text}</FormattedText></p>
       {cost.detail && (
         <>
           <button

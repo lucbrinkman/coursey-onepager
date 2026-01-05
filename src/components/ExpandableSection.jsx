@@ -26,6 +26,9 @@ export default function ExpandableSection({ content, trigger }) {
     return () => window.removeEventListener('resize', updateHeight)
   }, [content])
 
+  // If no content, don't render anything
+  if (!content) return null
+
   // If a custom trigger is provided, use inline style
   if (trigger) {
     return (

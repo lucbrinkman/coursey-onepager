@@ -221,26 +221,34 @@ export default function CostVisualization() {
         {/* Cost breakdown pie */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-8 max-w-md mx-auto">
           <h2 className="text-lg font-semibold text-slate-800 mb-4 text-center">Cost Breakdown (Per Lesson)</h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie
-                data={breakdownData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={2}
-                dataKey="value"
-                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                labelLine={false}
-              >
-                {breakdownData.map((entry, index) => (
-                  <Cell key={index} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value) => formatCurrency(value)} />
-            </PieChart>
-          </ResponsiveContainer>
+          <div className="relative">
+            <ResponsiveContainer width="100%" height={280}>
+              <PieChart>
+                <Pie
+                  data={breakdownData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={100}
+                  paddingAngle={2}
+                  dataKey="value"
+                  label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+                  labelLine={false}
+                >
+                  {breakdownData.map((entry, index) => (
+                    <Cell key={index} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value) => formatCurrency(value)} />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-slate-800">{formatCurrency(costs.lesson.total)}</p>
+                <p className="text-xs text-slate-500">total</p>
+              </div>
+            </div>
+          </div>
           <div className="flex justify-center gap-4 mt-2 flex-wrap">
             {breakdownData.map((item) => (
               <div key={item.name} className="flex items-center gap-2">

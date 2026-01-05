@@ -20,28 +20,34 @@ function StepCard({ step, isOpen, onToggle, isLast }) {
     return () => window.removeEventListener('resize', updateHeight)
   }, [step.detail])
 
+  const hasDetail = !!step.detail
+
   return (
     <div className="flex items-center">
       <div className="bg-gray-50 rounded-lg p-4 flex-1 min-w-0">
         <h3 className="font-medium text-gray-900 text-sm">{step.label}</h3>
-        <button
-          onClick={onToggle}
-          className="flex items-center gap-1 mt-2 text-xs text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
-        >
-          <ChevronDown
-            size={14}
-            className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-          />
-          {isOpen ? ui.less : ui.more}
-        </button>
-        <div
-          className="overflow-hidden transition-all duration-300 ease-in-out"
-          style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
-        >
-          <div ref={contentRef} className="pt-2 text-xs text-gray-600 whitespace-pre-line">
-            <FormattedText>{step.detail}</FormattedText>
-          </div>
-        </div>
+        {hasDetail && (
+          <>
+            <button
+              onClick={onToggle}
+              className="flex items-center gap-1 mt-2 text-xs text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
+            >
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+              />
+              {isOpen ? ui.less : ui.more}
+            </button>
+            <div
+              className="overflow-hidden transition-all duration-300 ease-in-out"
+              style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
+            >
+              <div ref={contentRef} className="pt-2 text-xs text-gray-600 whitespace-pre-line">
+                <FormattedText>{step.detail}</FormattedText>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       {!isLast && (
         <ArrowRight size={20} className="text-gray-400 mx-2 shrink-0" />
@@ -94,24 +100,28 @@ export default function TheoryOfChange() {
             <div key={i}>
               <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="font-medium text-gray-900">{step.label}</h3>
-                <button
-                  onClick={() => toggle(`step-${i}`)}
-                  className="flex items-center gap-1 mt-2 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
-                >
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-300 ${openItems[`step-${i}`] ? 'rotate-180' : ''}`}
-                  />
-                  {openItems[`step-${i}`] ? ui.less : ui.more}
-                </button>
-                <div
-                  className="overflow-hidden transition-all duration-300 ease-in-out"
-                  style={{ maxHeight: openItems[`step-${i}`] ? '100px' : '0px' }}
-                >
-                  <div className="pt-2 text-sm text-gray-600">
-                    {step.detail}
-                  </div>
-                </div>
+                {step.detail && (
+                  <>
+                    <button
+                      onClick={() => toggle(`step-${i}`)}
+                      className="flex items-center gap-1 mt-2 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
+                    >
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${openItems[`step-${i}`] ? 'rotate-180' : ''}`}
+                      />
+                      {openItems[`step-${i}`] ? ui.less : ui.more}
+                    </button>
+                    <div
+                      className="overflow-hidden transition-all duration-300 ease-in-out"
+                      style={{ maxHeight: openItems[`step-${i}`] ? '100px' : '0px' }}
+                    >
+                      <div className="pt-2 text-sm text-gray-600">
+                        {step.detail}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               {i < theoryOfChangeSection.steps.length - 1 && (
                 <div className="flex justify-center py-2">

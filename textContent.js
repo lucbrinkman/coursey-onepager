@@ -46,14 +46,14 @@ export const problemsSection = {
     {
       // PROBLEM 1: Not enough capacity in existing programs
       headline: "Too few spots",
-      text: "BlueDot had 1,450 applications for 400 spots. Most people who want to learn AI Safety can't get in.",
-      detail: "Demand for AI Safety education far outstrips available supply across all major programs.",
+      text: "BlueDot had 1,450 applications for 400 spots.",
+      detail: "Lots of people want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem.",
     },
     {
       // PROBLEM 2: People don't know what to do after learning
       headline: "Unclear what to do",
       text: "People finish courses without knowing what they should actually work on, or why alignment is so hard.",
-      detail: "Current courses often focus on knowledge transfer without developing strategic thinking about career paths and impactful work.",
+      detail: "Current courses often focus on knowledge transfer without developing strategic thinking about career paths and impactful work. While this somewhat prepares people for entry level AI Safety jobs, those jobs are saturated with good applications and are not necessarily the most impactful.",
     },
   ],
 };
@@ -67,7 +67,7 @@ export const problemsSection = {
 export const solutionSection = {
   sectionTitle: "The Solution",
   // A single punchy sentence introducing Coursey
-  text: "Build a scalable solution to help people understand the current situation to empower them to use their agency to do something about this.",
+  text: "A free and scalable course that helps people understand the current situation to empower them to use their agency to do something about this.",
 };
 
 
@@ -260,9 +260,11 @@ export const timelineSection = {
     },
     {
       date: "Late Feb",
-      label: "Full scale cohort",
+      label: "Full scale cohort + New Modules",
       past: false,  // Coming up
-      detail: "",
+      detail: `We'll launch fully at a scale similar to what BlueDot currently offers, provided we have enough students and facilitators wanting to participate.
+      
+      We'll also launch the first optional modules that strengthen our flagship course.`,
     },
   ],
 
@@ -271,7 +273,7 @@ export const timelineSection = {
   branches: [
     {
       date: "Mar",
-      label: "Second course + creation tools",
+      label: "Second course + continuous improvement tooling",
       detail: "Launching additional course content and tools for easier course creation",
     },
     {
@@ -310,7 +312,7 @@ export const costsSection = {
     We expect to grow in the future, but leading AI-native companies show large teams are no longer required for success.
     
     Salaries wil be for:
-    - Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is platform.
+    - Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is succesful.
     - A co-founder that we're currently looking for. However, we're not depending on finding a cofounder quickly, and would rather take our time to find a really good match.`,
   },
 
@@ -319,7 +321,7 @@ export const costsSection = {
     headline: "Marginal costs",
     amount: "$5",
     amountLabel: "per student",
-    text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure.",
+    text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure. See our [cost calculator](/costs) for the full breakdown.",
     // detail: "These are the only ongoing costs - no human labor required to run courses.",
   },
 };
@@ -340,7 +342,7 @@ export const askSection = {
   },
 
   // Context line below the ask
-  contextLine: "Funding to reach full automation and first cohort at scale.",
+  // contextLine: "Funding to reach full automation and pro",
 };
 
 

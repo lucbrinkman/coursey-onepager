@@ -20,31 +20,42 @@ function TimelineItem({ item, isOpen, onToggle }) {
     return () => window.removeEventListener('resize', updateHeight)
   }, [item.detail])
 
+  const hasDetail = !!item.detail
+
   return (
     <div className="flex items-start gap-3 py-2">
       <div className={`w-3 h-3 rounded-full mt-2.5 shrink-0 ${
         item.past ? 'bg-gray-900' : 'border-2 border-gray-400 bg-white'
       }`} />
       <div className="flex-1">
-        <button
-          onClick={onToggle}
-          className="flex items-baseline gap-2 w-full text-left hover:bg-gray-50 rounded transition-colors cursor-pointer py-1"
-        >
-          <span className="text-sm text-gray-500">{item.date}</span>
-          <span className="font-medium text-gray-900">{item.label}</span>
-          <ChevronDown
-            size={14}
-            className={`shrink-0 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-          />
-        </button>
-        <div
-          className="overflow-hidden transition-all duration-300 ease-in-out"
-          style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
-        >
-          <div ref={contentRef} className="pt-1 pb-2 text-sm text-gray-500 whitespace-pre-line">
-            <FormattedText>{item.detail}</FormattedText>
+        {hasDetail ? (
+          <button
+            onClick={onToggle}
+            className="flex items-baseline gap-2 w-full text-left hover:bg-gray-50 rounded transition-colors cursor-pointer py-1"
+          >
+            <span className="text-sm text-gray-500">{item.date}</span>
+            <span className="font-medium text-gray-900">{item.label}</span>
+            <ChevronDown
+              size={14}
+              className={`shrink-0 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        ) : (
+          <div className="flex items-baseline gap-2 py-1">
+            <span className="text-sm text-gray-500">{item.date}</span>
+            <span className="font-medium text-gray-900">{item.label}</span>
           </div>
-        </div>
+        )}
+        {hasDetail && (
+          <div
+            className="overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
+          >
+            <div ref={contentRef} className="pt-1 pb-2 text-sm text-gray-500 whitespace-pre-line">
+              <FormattedText>{item.detail}</FormattedText>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

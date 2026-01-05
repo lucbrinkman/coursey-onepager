@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { askSection } from '../../textContent'
 
 export default function TheAsk() {
@@ -16,6 +17,11 @@ export default function TheAsk() {
       </div>
       <p className="mt-6 text-center text-gray-500 max-w-lg mx-auto">
         {askSection.contextLine}
+      </p>
+      <p className="mt-4 text-center">
+        <Link to="/team-costs" className="text-blue-600 hover:underline">
+          See cost breakdown →
+        </Link>
       </p>
     </section>
   )
