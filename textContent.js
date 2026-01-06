@@ -40,19 +40,19 @@ export const header = {
 
 export const problemsSection = {
   // The heading above all the problem cards
-  sectionTitle: "The Problem in the upskiling pipeline",
+  sectionTitle: "The Problem in the upskilling pipeline",
 
   problems: [
     {
       // PROBLEM 1: Not enough capacity in existing programs
-      headline: "Too few spots",
+      headline: "People can't get in",
       text: "BlueDot had 1,450 applications for 400 spots",
-      detail: "Lots of people want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem. With a marginal cost per user of 400 USD, BlueDot is already rejecting many people, and demand is growing rapidly.",
+      detail: "And many more than those 1,450 want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem. With a marginal cost per user of 400 USD, BlueDot is already rejecting many people, and demand is growing rapidly.",
     },
     {
       // PROBLEM 2: People don't know what to do after learning
-      headline: "Unclear what to do",
-      text: "People finish courses without a technical and strategic picture which lets them figure out what to helps reduce x-risk.",
+      headline: "People don't know what to do",
+      text: "People finish courses without a technical and strategic picture which lets them figure out what helps reduce x-risk.",
       detail: "Current courses often focus on knowledge transfer about current agendas without developing strategic thinking about career paths and impactful work. While this somewhat prepares people for entry level AI Safety jobs, those jobs are saturated with good applications and are not necessarily the most impactful.",
     },
   ],
@@ -83,20 +83,20 @@ export const theoryOfChangeSection = {
   // The causal chain - each step leads to the next
   steps: [
     {
-      label: "Build scalable education",
-      detail: "Create a platform that can reach millions at $5/student",
+      label: "Offer Education That's Free, Scalable, and High Quality",
+      detail: "The demand is already there. We're focused on an underserved market, for which we create a platform that can reach millions at $5/student whilst being higher quality than any existing AI Safety resources.",
     },
     {
-      label: "People understand the situation",
-      detail: "Teach why misaligned superintelligence is a core risk and the hard problems of superintelligence alignment",
+      label: "Students Understand the Situation",
+      detail: "After taking our course, people understand why misaligned superintelligence is a core risk and understand the hard problems of superintelligence alignment.",
     },
     {
-      label: "Empower agency",
-      detail: "Give people strategic thinking about what they can actually work on",
+      label: "Students are Empowered",
+      detail: "We don't stop at understanding. We teach people strategic thinking about what they can actually work on, and help them transfer thoughts into action.",
     },
     {
-      label: "Take meaningful action",
-      detail: "More people contributing to AI Safety research, policy, and governance",
+      label: "Alumni Take Meaningful Action",
+      detail: "We stay in touch with alumni to track that we're actually enabling them to be more impactful in domains like AI Safety research, policy, and governance",
     },
   ],
 };
@@ -321,20 +321,20 @@ export const costsSection = {
 
   // Fixed costs explanation
   fixedCosts: {
-    headline: "Fixed costs",
+    headline: "Fixed Costs for Building",
     amount: "$300k",
     amountLabel: "per year",
     text: "Salaries and contractors for platform development: building the course content, AI tutoring system, and automation infrastructure. See the [cost breakdown](/team-costs).",
-    // detail moved to /team-costs page
+    // detail: "test"
   },
 
   // Marginal costs explanation
   marginalCosts: {
-    headline: "Marginal costs",
+    headline: "Marginal Costs for Running Courses",
     amount: "$5",
     amountLabel: "per student",
     text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure. See our [cost calculator](/costs) for the full breakdown.",
-    detail: "We expect to find enough resources to cover these costs in a way that scales infinitely. By the time 100 million people would want to take the course, there would also be enough interest in providing the $500M required in funding. For now, we cover them from the buffer included in the bugdet. In the future, we'll experiment with asking students for donations after taking the course.",
+    detail: "We expect to find enough resources to cover these costs in a way that scales infinitely. By the time 100 million people would want to take the course, there would also be enough interest in providing the $500M required in funding. For now, we cover them from the buffer included in the budget. In the future, we'll experiment with asking students for donations after taking the course.",
   },
 };
 
@@ -358,8 +358,8 @@ export const teamCostsSection = {
 
 While we expect to grow in the future, leading AI-native companies show large teams are no longer required for success.
 
-Salaries wil be for:
-- Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is succesful.
+Salaries will be for:
+- Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is successful.
 - A co-founder that we're currently looking for. However, we're not depending on finding a cofounder quickly, and would rather take our time to find somebody excellent.`,
 
   // Footer note

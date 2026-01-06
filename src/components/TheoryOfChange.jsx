@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 import { useExpand } from './ExpandContext'
 import { theoryOfChangeSection, ui } from '../../textContent'
 import FormattedText from './FormattedText'
 
-function StepCard({ step, isOpen, onToggle, isLast }) {
+function StepCard({ step, isOpen, onToggle }) {
   const contentRef = useRef(null)
   const [height, setHeight] = useState(0)
 
@@ -23,37 +23,32 @@ function StepCard({ step, isOpen, onToggle, isLast }) {
   const hasDetail = !!step.detail
 
   return (
-    <div className="flex items-center">
-      <div
-        className={`bg-gray-50 rounded-lg p-4 flex-1 min-w-0 ${hasDetail ? 'cursor-pointer' : ''}`}
-        onClick={hasDetail ? onToggle : undefined}
-      >
-        <h3 className="font-medium text-gray-900 text-sm">{step.label}</h3>
-        {hasDetail && (
-          <>
-            <button
-              onClick={(e) => { e.stopPropagation(); onToggle(); }}
-              className="flex items-center gap-1 mt-2 text-xs text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
-            >
-              <ChevronDown
-                size={14}
-                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-              />
-              {isOpen ? ui.less : ui.more}
-            </button>
-            <div
-              className="overflow-hidden transition-all duration-300 ease-in-out"
-              style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
-            >
-              <div ref={contentRef} className="pt-2 text-xs text-gray-600 whitespace-pre-line">
-                <FormattedText>{step.detail}</FormattedText>
-              </div>
+    <div
+      className={`bg-gray-50 rounded-lg p-4 h-full ${hasDetail ? 'cursor-pointer' : ''}`}
+      onClick={hasDetail ? onToggle : undefined}
+    >
+      <h3 className="font-medium text-gray-900 text-sm text-center">{step.label}</h3>
+      {hasDetail && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); onToggle(); }}
+            className="flex items-center justify-center gap-1 mt-2 text-xs text-gray-500 hover:text-gray-700 transition-colors cursor-pointer w-full"
+          >
+            <ChevronDown
+              size={14}
+              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+            {isOpen ? ui.less : ui.more}
+          </button>
+          <div
+            className="overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ maxHeight: isOpen ? `${height}px` : '0px' }}
+          >
+            <div ref={contentRef} className="pt-2 text-xs text-gray-600 whitespace-pre-line">
+              <FormattedText>{step.detail}</FormattedText>
             </div>
-          </>
-        )}
-      </div>
-      {!isLast && (
-        <ArrowRight size={20} className="text-gray-400 mx-2 shrink-0" />
+          </div>
+        </>
       )}
     </div>
   )
@@ -84,16 +79,19 @@ export default function TheoryOfChange() {
       </h2>
 
       <div className="max-w-4xl mx-auto px-4">
-        {/* Desktop: horizontal chain */}
-        <div className="hidden md:flex items-start justify-between gap-2">
+        {/* Desktop: horizontal chain with equal-width columns */}
+        <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start gap-2">
           {theoryOfChangeSection.steps.map((step, i) => (
-            <StepCard
-              key={i}
-              step={step}
-              isOpen={openItems[`step-${i}`]}
-              onToggle={() => toggle(`step-${i}`)}
-              isLast={i === theoryOfChangeSection.steps.length - 1}
-            />
+            <React.Fragment key={i}>
+              <StepCard
+                step={step}
+                isOpen={openItems[`step-${i}`]}
+                onToggle={() => toggle(`step-${i}`)}
+              />
+              {i < theoryOfChangeSection.steps.length - 1 && (
+                <ArrowRight size={20} className="text-gray-400 mt-4 shrink-0" />
+              )}
+            </React.Fragment>
           ))}
         </div>
 
