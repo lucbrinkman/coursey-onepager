@@ -3,6 +3,12 @@ import { ChevronDown } from 'lucide-react'
 import { useExpand } from './ExpandContext'
 import { costsSection, ui } from '../../textContent'
 import FormattedText from './FormattedText'
+import { TOTAL_BUDGET } from './TeamCosts'
+
+// Format budget as $XXXk
+function formatBudgetShort(value) {
+  return '$' + Math.round(value / 1000) + 'k'
+}
 
 function CostCard({ cost, isOpen, onToggle, showAmount }) {
   const contentRef = useRef(null)
@@ -85,7 +91,7 @@ export default function Costs() {
       <div className="max-w-3xl mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-6">
           <CostCard
-            cost={costsSection.fixedCosts}
+            cost={{ ...costsSection.fixedCosts, amount: formatBudgetShort(TOTAL_BUDGET) }}
             isOpen={openItems.fixed}
             onToggle={() => toggle('fixed')}
             showAmount={true}

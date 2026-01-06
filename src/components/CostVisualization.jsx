@@ -250,7 +250,7 @@ export default function CostVisualization() {
                 {/* Lessons label column - vertically centered to align with grid */}
                 <div className="flex flex-col justify-center">
                   <div className="text-sm text-slate-500" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                    {params.lessonsPerModule} lessons
+                    {params.lessonsPerModule} lessons + 1 group meeting
                   </div>
                 </div>
 
@@ -259,7 +259,7 @@ export default function CostVisualization() {
                   {/* Modules label on top */}
                   <div className="text-sm text-slate-500 mb-2 text-center">{params.modulesPerCourse} modules</div>
 
-                  {/* Grid - 4 rows x 5 columns */}
+                  {/* Grid - lessons + group meeting row per module */}
                   <div className="flex flex-col gap-1.5">
                     {Array.from({ length: params.lessonsPerModule }).map((_, lessonIdx) => (
                       <div key={lessonIdx} className="flex gap-1.5">
@@ -274,6 +274,18 @@ export default function CostVisualization() {
                         ))}
                       </div>
                     ))}
+                    {/* Group meeting row */}
+                    <div className="flex gap-1.5">
+                      {Array.from({ length: params.modulesPerCourse }).map((_, moduleIdx) => (
+                        <div
+                          key={moduleIdx}
+                          className="w-12 h-12 bg-slate-400 rounded flex flex-col items-center justify-center p-0.5"
+                        >
+                          <span className="text-xs text-white font-medium">2h</span>
+                          <span className="text-[11px] text-white font-light">$0</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Total */}
@@ -286,7 +298,7 @@ export default function CostVisualization() {
                 {/* Right spacer - matches lessons label width to center the whole thing */}
                 <div className="flex flex-col justify-center">
                   <div className="text-sm invisible" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                    {params.lessonsPerModule} lessons
+                    {params.lessonsPerModule} lessons + 1 group meeting
                   </div>
                 </div>
               </div>
@@ -354,24 +366,24 @@ export default function CostVisualization() {
 
         {/* What's in a lesson */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-8">
-          <h2 className="text-lg font-semibold text-slate-800 mb-4">What's in a lesson?</h2>
-          <p className="text-slate-600 mb-4 text-center">A lesson is about one hour of work.</p>
+          <h2 className="text-lg font-semibold text-slate-800 mb-4">A lesson is about one hour of learning, including:</h2>
+          <p className="text-slate-600 mb-4 text-center"></p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
               <p className="text-3xl font-bold text-slate-800">{params.articlesPerLesson}</p>
-              <p className="text-sm text-slate-500">articles to read</p>
+              <p className="text-sm text-slate-500">Articles to read</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-slate-800">{costs.params.conversationsPerLesson}</p>
-              <p className="text-sm text-slate-500">AI conversations</p>
+              <p className="text-sm text-slate-500">AI Tutor conversations</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-slate-800">{costs.params.turnsPerConversation}</p>
-              <p className="text-sm text-slate-500">turns per conversation</p>
+              <p className="text-sm text-slate-500">Turns per conversation</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-slate-800">{costs.params.conversationsPerLesson * costs.params.turnsPerConversation}</p>
-              <p className="text-sm text-slate-500">total AI responses</p>
+              <p className="text-sm text-slate-500">Total AI Tutor responses</p>
             </div>
           </div>
         </div>

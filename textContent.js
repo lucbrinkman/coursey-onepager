@@ -40,14 +40,14 @@ export const header = {
 
 export const problemsSection = {
   // The heading above all the problem cards
-  sectionTitle: "The Problem",
+  sectionTitle: "The Problem in the upskiling pipeline",
 
   problems: [
     {
       // PROBLEM 1: Not enough capacity in existing programs
       headline: "Too few spots",
-      text: "BlueDot had 1,450 applications for 400 spots.",
-      detail: "Lots of people want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem.",
+      text: "BlueDot had 1,450 applications for 400 spots",
+      detail: "Lots of people want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem. With a marginal cost per user of 400 USD, BlueDot is already rejecting many people, and demand is growing rapidly.",
     },
     {
       // PROBLEM 2: People don't know what to do after learning
@@ -67,7 +67,7 @@ export const problemsSection = {
 export const solutionSection = {
   sectionTitle: "The Solution",
   // A single punchy sentence introducing Coursey
-  text: "A free and scalable course that helps people understand the current situation to empower them to use their agency to do something about this.",
+  text: "A free and scalable course that helps people understand the current situation, and empowers them to use their agency to do something about it.",
 };
 
 
@@ -127,7 +127,7 @@ export const uspSection = {
         },
         {
           text: "Understand the core challenges to alignment",
-          detail: "We teach the major obsticles to superintelligence alignment and both the benefits and limitations of different approaches.",
+          detail: "We teach the major obstacles to superintelligence alignment and both the benefits and limitations of different approaches.",
         },
         {
           text: "Strategic thinking about what to work on",
@@ -250,7 +250,7 @@ export const timelineSection = {
       date: "Ca. Jan 12",
       label: "Open Alpha",
       past: false,  // Coming up
-      detail: "Opening the platform for beta testers, including a first 1h lesson with progress tracking and the ability to sign up for our first cohort.",
+      detail: "Opening the platform for alpha testers, including a first 1h lesson with progress tracking and the ability to sign up for our first cohort.",
     },
     {
       date: "Mid-Late Jan",
@@ -324,7 +324,7 @@ export const costsSection = {
     headline: "Fixed costs",
     amount: "$300k",
     amountLabel: "per year",
-    text: "Salaries for platform development: building the course content, AI tutoring system, and automation infrastructure. See the [cost breakdown](/team-costs).",
+    text: "Salaries and contractors for platform development: building the course content, AI tutoring system, and automation infrastructure. See the [cost breakdown](/team-costs).",
     // detail moved to /team-costs page
   },
 
@@ -344,6 +344,34 @@ export const costsSection = {
 // ============================================================================
 // What we're asking for from the donor
 
+// ============================================================================
+// TEAM COSTS SECTION
+// ============================================================================
+// Content for the /team-costs page that breaks down the budget
+
+export const teamCostsSection = {
+  pageTitle: "Team Costs",
+  pageSubtitle: "What it costs to fund two people working full-time on Coursey",
+
+  // Context paragraphs explaining the team structure (use backticks for line breaks)
+  context: `Costs cover two co-founders and occasional contractors.
+
+While we expect to grow in the future, leading AI-native companies show large teams are no longer required for success.
+
+Salaries wil be for:
+- Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is succesful.
+- A co-founder that we're currently looking for. However, we're not depending on finding a cofounder quickly, and would rather take our time to find somebody excellent.`,
+
+  // Footer note
+  footer: "Based on Zurich cost of living • CHF/USD rate: {chfToUsd} (Oct 2025 average)",
+};
+
+
+// ============================================================================
+// THE ASK SECTION
+// ============================================================================
+// What we're asking for from the donor
+
 export const askSection = {
   sectionTitle: "Our Ask",
 
@@ -354,7 +382,7 @@ export const askSection = {
   },
 
   // Context line below the ask
-  contextLine: "In four months, reevaluate. Only continue funding if you're impressed.",
+  contextLine: "In four months, we expect to have plenty of evidence for further funding from initial and additional grantmakers.",
 };
 
 
