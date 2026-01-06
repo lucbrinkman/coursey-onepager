@@ -47,7 +47,7 @@ export const problemsSection = {
       // PROBLEM 1: Not enough capacity in existing programs
       headline: "People can't get in",
       text: "BlueDot had 1,450 applications for 400 spots. Far more than 1450 people would benefit from understanding AI Safety.",
-      detail: "And many more than those 1,450 want to understand things about AI safety. There isn't a scalable solution to help people get clarity on the problem. With a marginal cost per user of 400 USD, BlueDot is already rejecting many people, and demand is growing rapidly.",
+      detail: "There isn't a scalable solution to help people get clarity on the problem. With a marginal cost per user of 400 USD, BlueDot is already rejecting many people, and demand is growing rapidly.",
     },
     {
       // PROBLEM 2: People don't know what to do after learning
