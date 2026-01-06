@@ -4,15 +4,22 @@ import { useExpand } from './ExpandContext'
 import { ui } from '../../textContent'
 import FormattedText from './FormattedText'
 
-export default function ExpandableSection({ content, trigger }) {
+export default function ExpandableSection({ content, trigger, isOpen: controlledIsOpen, onToggle }) {
   const { expandAll } = useExpand()
-  const [isOpen, setIsOpen] = useState(false)
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
   const contentRef = useRef(null)
   const [height, setHeight] = useState(0)
 
+  // Use controlled state if provided, otherwise use internal state
+  const isControlled = controlledIsOpen !== undefined
+  const isOpen = isControlled ? controlledIsOpen : internalIsOpen
+  const handleToggle = isControlled ? onToggle : () => setInternalIsOpen(!internalIsOpen)
+
   useEffect(() => {
-    setIsOpen(expandAll)
-  }, [expandAll])
+    if (!isControlled) {
+      setInternalIsOpen(expandAll)
+    }
+  }, [expandAll, isControlled])
 
   useEffect(() => {
     const updateHeight = () => {
@@ -34,7 +41,7 @@ export default function ExpandableSection({ content, trigger }) {
     return (
       <div>
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={handleToggle}
           className="flex items-center gap-1 text-left w-full hover:bg-gray-50 rounded transition-colors cursor-pointer py-1"
           aria-expanded={isOpen}
         >
@@ -60,7 +67,7 @@ export default function ExpandableSection({ content, trigger }) {
   return (
     <div className="mt-3">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => { e.stopPropagation(); handleToggle(e); }}
         className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
         aria-expanded={isOpen}
       >

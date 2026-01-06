@@ -24,12 +24,15 @@ function StepCard({ step, isOpen, onToggle, isLast }) {
 
   return (
     <div className="flex items-center">
-      <div className="bg-gray-50 rounded-lg p-4 flex-1 min-w-0">
+      <div
+        className={`bg-gray-50 rounded-lg p-4 flex-1 min-w-0 ${hasDetail ? 'cursor-pointer' : ''}`}
+        onClick={hasDetail ? onToggle : undefined}
+      >
         <h3 className="font-medium text-gray-900 text-sm">{step.label}</h3>
         {hasDetail && (
           <>
             <button
-              onClick={onToggle}
+              onClick={(e) => { e.stopPropagation(); onToggle(); }}
               className="flex items-center gap-1 mt-2 text-xs text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
             >
               <ChevronDown
@@ -96,14 +99,19 @@ export default function TheoryOfChange() {
 
         {/* Mobile: vertical chain */}
         <div className="md:hidden space-y-3">
-          {theoryOfChangeSection.steps.map((step, i) => (
+          {theoryOfChangeSection.steps.map((step, i) => {
+            const hasDetail = !!step.detail
+            return (
             <div key={i}>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div
+                className={`bg-gray-50 rounded-lg p-4 ${hasDetail ? 'cursor-pointer' : ''}`}
+                onClick={hasDetail ? () => toggle(`step-${i}`) : undefined}
+              >
                 <h3 className="font-medium text-gray-900">{step.label}</h3>
                 {step.detail && (
                   <>
                     <button
-                      onClick={() => toggle(`step-${i}`)}
+                      onClick={(e) => { e.stopPropagation(); toggle(`step-${i}`); }}
                       className="flex items-center gap-1 mt-2 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
                     >
                       <ChevronDown
@@ -129,7 +137,7 @@ export default function TheoryOfChange() {
                 </div>
               )}
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </section>

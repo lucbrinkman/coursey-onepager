@@ -334,7 +334,7 @@ export const costsSection = {
     amount: "$5",
     amountLabel: "per student",
     text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure. See our [cost calculator](/costs) for the full breakdown.",
-    detail: "We expect to find enough resources to cover these costs in a way that scales to millions of students. For now, we cover them from the buffer included in the bugdet. In the future, we'll experiment with asking students for donations after taking the course.",
+    detail: "We expect to find enough resources to cover these costs in a way that scales infinitely. By the time 100 million people would want to take the course, there would also be enough interest in providing the $500M required in funding. For now, we cover them from the buffer included in the bugdet. In the future, we'll experiment with asking students for donations after taking the course.",
   },
 };
 
@@ -345,7 +345,7 @@ export const costsSection = {
 // What we're asking for from the donor
 
 export const askSection = {
-  sectionTitle: "The Ask",
+  sectionTitle: "Our Ask",
 
   // The main funding ask
   fundingAsk: {
@@ -354,7 +354,7 @@ export const askSection = {
   },
 
   // Context line below the ask
-  // contextLine: "Funding to reach full automation and pro",
+  contextLine: "In four months, reevaluate. Only continue funding if you're impressed.",
 };
 
 

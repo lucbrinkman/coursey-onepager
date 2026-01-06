@@ -7,6 +7,7 @@ import FormattedText from './FormattedText'
 function CostCard({ cost, isOpen, onToggle, showAmount }) {
   const contentRef = useRef(null)
   const [height, setHeight] = useState(0)
+  const hasDetail = !!cost.detail
 
   useEffect(() => {
     const updateHeight = () => {
@@ -21,7 +22,10 @@ function CostCard({ cost, isOpen, onToggle, showAmount }) {
   }, [cost.detail])
 
   return (
-    <div className="bg-gray-50 rounded-xl p-6 flex-1">
+    <div
+      className={`bg-gray-50 rounded-xl p-6 flex-1 ${hasDetail ? 'cursor-pointer' : ''}`}
+      onClick={hasDetail ? onToggle : undefined}
+    >
       <h3 className="font-semibold text-lg text-gray-900 mb-2">{cost.headline}</h3>
       {showAmount && (
         <div className="mb-3">
@@ -33,7 +37,7 @@ function CostCard({ cost, isOpen, onToggle, showAmount }) {
       {cost.detail && (
         <>
           <button
-            onClick={onToggle}
+            onClick={(e) => { e.stopPropagation(); onToggle(); }}
             className="flex items-center gap-1 mt-3 text-sm text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
           >
             <ChevronDown
