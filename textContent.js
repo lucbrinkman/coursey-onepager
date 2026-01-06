@@ -83,7 +83,7 @@ export const theoryOfChangeSection = {
   // The causal chain - each step leads to the next
   steps: [
     {
-      label: "Offer Education That's Free, Scalable, and High Quality",
+      label: "Offer Education that's Free, Scalable, and High Quality",
       detail: "The demand is already there. We're focused on an underserved market, for which we create a platform that can reach millions at $5/student whilst being higher quality than any existing AI Safety resources.",
     },
     {
