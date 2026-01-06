@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ExpandProvider } from './components/ExpandContext'
+import ScrollToTop from './components/ScrollToTop'
 import OnePager from './components/OnePager'
 import CostVisualization from './components/CostVisualization'
 import TeamCosts from './components/TeamCosts'
@@ -7,6 +8,7 @@ import TeamCosts from './components/TeamCosts'
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ExpandProvider>
         <Routes>
           <Route path="/" element={<OnePager />} />

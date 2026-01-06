@@ -126,21 +126,31 @@ export default function CostVisualization() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
       <div className="max-w-5xl mx-auto">
         {/* Back link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-6 transition-colors"
-        >
-          <ArrowLeft size={20} />
-          Back to One-Pager
-        </Link>
+        <div className="sticky top-0 z-50 bg-gradient-to-br from-slate-50 to-slate-100 py-3 -mx-8 px-8 mb-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
+          >
+            <ArrowLeft size={20} />
+            Back to One-Pager
+          </Link>
+        </div>
 
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-slate-800 mb-3">
-            Cost Per Student
+            Marginal Cost Calculator
           </h1>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             Students chat with an AI tutor about the course content. Here's what that costs.
           </p>
+          <div className="mt-4">
+            <Link
+              to="/team-costs"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors"
+            >
+              Fixed Cost Breakdown →
+            </Link>
+          </div>
         </div>
 
         {/* Key metrics */}

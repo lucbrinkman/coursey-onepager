@@ -84,7 +84,7 @@ export default function Costs() {
             cost={costsSection.fixedCosts}
             isOpen={openItems.fixed}
             onToggle={() => toggle('fixed')}
-            showAmount={false}
+            showAmount={true}
           />
           <CostCard
             cost={costsSection.marginalCosts}

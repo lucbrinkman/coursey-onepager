@@ -160,8 +160,14 @@ Many of the key principles in good education design happen to be **easy to imple
 **Spaced repetition**: brains need to get back to a topic over time to remember it long-term. At the end of the course, the learner should still be capable of the learning outcomes of all lessons – not just the last lesson.`,
         },
         {
-          text: "Measured learning outcomes",
-          detail: `We measure learning outcomes to ensure we're actually teaching people what we want, rather than just making people *feel like* they've learned something – which is a common pitfall in popular  education.`,
+          text: "Continuous Improvement",
+          detail: `We enable continuous improvement of our courses by:
+          
+          **Measuring learning outcomes.** This ensures we're actually teaching people what we want, rather than just making people *feel like* they've learned something – a common pitfall in online education. 
+          
+          **A/B testing** different teaching methods and learning materials (articles/videos) to see which work best to achieve those learning outcomes.
+
+          **Tracking participants after course completion.** When a learner finishes our course, their journey into AI Safety only just begins. We stay in touch with our alumni to see if our courses are actually helping them be more impactful.`,
         },
       ],
     },
@@ -242,29 +248,31 @@ export const timelineSection = {
     },
     {
       date: "Ca. Jan 12",
-      label: "Open beta",
+      label: "Open Alpha",
       past: false,  // Coming up
       detail: "Opening the platform for beta testers, including a first 1h lesson with progress tracking and the ability to sign up for our first cohort.",
     },
     {
       date: "Mid-Late Jan",
-      label: "Beta cohort",
+      label: "Alpha cohort",
       past: false,  // Coming up
-      detail: `Launch of the first structured cohort with group sessions. This allows us to figure out all the kinks in our automation system and fix them. We will facilitate this first cohort by ourselves.`,
+      detail: `Launch of the first structured cohort with group sessions. This allows us to figure out all the kinks in our automation system and fix them. We will facilitate this first cohort by ourselves to learn what works and what doesn't.`,
     },
     {
       date: "Early Feb",
-      label: "Beta cohort 2",
+      label: "Beta cohort",
       past: false,  // Coming up
-      detail: "This second beta cohort will be run by external volunteer facilitators, which allows us to test what they need and to further test our automation systems.",
+      detail: "This second beta cohort will be run by volunteer facilitators, which allows us to test what they need and to further test our automation systems.",
     },
     {
       date: "Late Feb",
       label: "Full scale cohort + New Modules",
       past: false,  // Coming up
-      detail: `We'll launch fully at a scale similar to what BlueDot currently offers, provided we have enough students and facilitators wanting to participate.
+      detail: `We'll be able to host hundreds of students per month (similar to the scale that BlueDot currently offers), provided we have enough demand from students and enough facilitators wanting to participate. We expect to have to work out some final optimizations in our automated operations, before we'll be able to scale to (tens of) thousands of students per month.
       
-      We'll also launch the first optional modules that strengthen our flagship course.`,
+      We will test various growth and marketing strategies and likely partner with an existing marketing org in the AI Safety space to help us figure out how to activate the expected demand for our course.
+      
+      We'll also launch the first optional modules that strengthen our flagship course. This may include modules on effectively communicating about AI Safety and mental health.`,
     },
   ],
 
@@ -274,16 +282,24 @@ export const timelineSection = {
     {
       date: "Mar",
       label: "Second course + continuous improvement tooling",
-      detail: "Launching additional course content and tools for easier course creation",
+      detail: `We're considering to launch courses and modules on **Governance, Technical Safety, and Effective Grantmaking.**
+      
+      We're also planning tools that make creating and improving courses easier, including tools for **automatically A/B testing** new explainers (articles/videos) compared to existing material.
+      
+      We'll also set up systems that **nudge participants to help improve the course** by writing new material and creating new videos, potentially with monetary rewards for content that's good enough to become part of our course.`,
     },
     {
       date: "Apr",
-      label: "Potential Sister Projects",
+      label: "Potential new product releases",
       detail: `In the age of AI, you don't need an entire team to work for 1 year to build a product. We have several inter-related ideas to strengthen the AI Safety ecosystem, including:
       
-      - More tightly integrating Stampy, an *informational* AI Safety chatbot (which has a slightly different focus from our *educational* AI Tutor.)
+      More tightly integrating **Stampy**, an *informational* AI Safety chatbot (which has a slightly different focus from our *educational* AI Tutor.)
 
-      - An AI Safety networking and matchmaking tool, that connects people based on interests and skills.`,
+      An **AI Safety networking and matchmaking tool**, that connects people based on interests and skills.
+      
+      A **first-contact AI safety onboarding tool**, that helps people figure out where they are and what the next step in their AI Safety journey could be.
+      
+      We're already in touch with people developing or thinking about developing each of these, and they would integrate well with our core offering.`,
     },
   ],
 
@@ -306,14 +322,10 @@ export const costsSection = {
   // Fixed costs explanation
   fixedCosts: {
     headline: "Fixed costs",
-    text: "Salaries for platform development: building the course content, AI tutoring system, and automation infrastructure.",
-    detail: `Roughly 150k USD/y per person, for 2 people. Those are budgets, not gross salaries. Employer-side costs and software costs will be incurred.
-
-    We expect to grow in the future, but leading AI-native companies show large teams are no longer required for success.
-    
-    Salaries wil be for:
-    - Current founder (Luc). This will still be below the median income where Luc lives and significantly below the counterfactual salary in the industry. Salary is expected to rise when Coursey is succesful.
-    - A co-founder that we're currently looking for. However, we're not depending on finding a cofounder quickly, and would rather take our time to find a really good match.`,
+    amount: "$300k",
+    amountLabel: "per year",
+    text: "Salaries for platform development: building the course content, AI tutoring system, and automation infrastructure. See the [cost breakdown](/team-costs).",
+    // detail moved to /team-costs page
   },
 
   // Marginal costs explanation
@@ -322,7 +334,7 @@ export const costsSection = {
     amount: "$5",
     amountLabel: "per student",
     text: "Software fees for running the platform: AI tutoring, hosting, and infrastructure. See our [cost calculator](/costs) for the full breakdown.",
-    // detail: "These are the only ongoing costs - no human labor required to run courses.",
+    detail: "We expect to find enough resources to cover these costs in a way that scales to millions of students. For now, we cover them from the buffer included in the bugdet. In the future, we'll experiment with asking students for donations after taking the course.",
   },
 };
 
