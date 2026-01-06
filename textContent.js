@@ -40,7 +40,7 @@ export const header = {
 
 export const problemsSection = {
   // The heading above all the problem cards
-  sectionTitle: "The Problem in the upskilling pipeline",
+  sectionTitle: "The Problems in the upskilling pipeline",
 
   problems: [
     {
