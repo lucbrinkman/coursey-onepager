@@ -52,8 +52,8 @@ export const problemsSection = {
     {
       // PROBLEM 2: People don't know what to do after learning
       headline: "Unclear what to do",
-      text: "People finish courses without knowing what they should actually work on, or why alignment is so hard.",
-      detail: "Current courses often focus on knowledge transfer without developing strategic thinking about career paths and impactful work. While this somewhat prepares people for entry level AI Safety jobs, those jobs are saturated with good applications and are not necessarily the most impactful.",
+      text: "People finish courses without a technical and strategic picture which lets them figure out what to helps reduce x-risk.",
+      detail: "Current courses often focus on knowledge transfer about current agendas without developing strategic thinking about career paths and impactful work. While this somewhat prepares people for entry level AI Safety jobs, those jobs are saturated with good applications and are not necessarily the most impactful.",
     },
   ],
 };
@@ -88,7 +88,7 @@ export const theoryOfChangeSection = {
     },
     {
       label: "People understand the situation",
-      detail: "Teach why misaligned superintelligence is a core risk and why alignment is hard",
+      detail: "Teach why misaligned superintelligence is a core risk and the hard problems of superintelligence alignment",
     },
     {
       label: "Empower agency",
@@ -122,12 +122,12 @@ export const uspSection = {
       headline: "Focus on what matters",
       bullets: [
         {
-          text: "Misaligned superintelligence as the core risk",
+          text: "Misaligned superintelligence as the central risk",
           detail: "We focus on the scenarios most likely to cause existential harm and make them tangible, instead of focusing on topics that are easiest to explain but are less likely to cause catastrophe.",
         },
         {
-          text: "Why alignment is actually hard",
-          detail: "We teach the core technical and philosophical challenges that make AI alignment genuinely difficult.",
+          text: "Understand the core challenges to alignment",
+          detail: "We teach the major obsticles to superintelligence alignment and both the benefits and limitations of different approaches.",
         },
         {
           text: "Strategic thinking about what to work on",
@@ -183,7 +183,7 @@ Many of the key principles in good education design happen to be **easy to imple
           
           After the trial lesson, people who want to are guaranteed to be accepted in our course.
           
-          We will try to match students of similar skill levels together.`,
+          We will try to match students of similar backgrounds and skill levels together.`,
         },
         {
           text: "$5/student marginal cost",
