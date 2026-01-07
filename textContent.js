@@ -122,11 +122,14 @@ export const uspSection = {
       headline: "Focus on what matters",
       bullets: [
         {
-          text: "Misaligned superintelligence as the central risk",
+          text: "Epistemically grounded prioritization",
+          detail: "Learning objectives and content can be challenged, and debates either with our bot as a first pass or a course creator around priorities and world models will be available to participents",
+        },{
+          text: "Focus: x-risk from misaligned superintelligence",
           detail: "We focus on the scenarios most likely to cause existential harm and make them tangible, instead of focusing on topics that are easiest to explain but are less likely to cause catastrophe.",
         },
         {
-          text: "Understand the core challenges to alignment",
+          text: "Communicate the core challenges to alignment",
           detail: "We teach the major obstacles to superintelligence alignment and both the benefits and limitations of different approaches.",
         },
         {
