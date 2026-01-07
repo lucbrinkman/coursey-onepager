@@ -167,9 +167,11 @@ Many of the key principles in good education design happen to be **easy to imple
           
           **A/B testing** different teaching methods and learning materials (articles/videos) to see which work best to achieve those learning outcomes.
 
-          **Tracking participants after course completion.** When a learner finishes our course, their journey into AI Safety only just begins. We stay in touch with our alumni to see if our courses are actually helping them be more impactful.
-        
-          **Top-tier advisors for learning objectives and content.** We are being advised by genune experts like Rob Miles who have already signed up as to help, rather than being advised by junior people or those people working at labs. Getting feedback on learning objectives not just readings will be much more time efficient, allowing us to tap busy experts.`,
+          **Tracking participants after course completion.** When a learner finishes our course, their journey into AI Safety only just begins. We stay in touch with our alumni to see if our courses are actually helping them be more impactful.`,
+        },
+        {
+          text: "Exceptional Curriculum and Content",
+          detail: `By structuring our course around learning objectives that take only a few minutes to review, we unlock feedback by world-level experts like Rob Miles who is already signed up as an advisor, and at the same time unlock new creators potential by making a bounty system for new content that satisfies the learning objectives.`,
         },
       ],
     },
